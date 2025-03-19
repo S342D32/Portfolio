@@ -16,7 +16,7 @@ const Navbar = () => {
       }
       
       // Detect active section
-      const sections = ['home', 'about', 'projects', 'contact'];
+      const sections = ['home', 'about', 'projects', 'certifications', 'contact'];
       let current = '';
       
       for (const section of sections) {
@@ -74,6 +74,7 @@ const Navbar = () => {
         <NavLink href="#home" isActive={activeSection === 'home'} onClick={handleNavClick} scrolled={scrolled}>Home</NavLink>
         <NavLink href="#about" isActive={activeSection === 'about'} onClick={handleNavClick} scrolled={scrolled}>About</NavLink>
         <NavLink href="#projects" isActive={activeSection === 'projects'} onClick={handleNavClick} scrolled={scrolled}>Projects</NavLink>
+        <NavLink href="#certifications" isActive={activeSection === 'certifications'} onClick={handleNavClick} scrolled={scrolled}>Certifications</NavLink>
         <NavLink href="#contact" isActive={activeSection === 'contact'} onClick={handleNavClick} scrolled={scrolled}>Contact</NavLink>
       </div>
 
@@ -113,6 +114,7 @@ const Navbar = () => {
               <MobileNavLink href="#home" isActive={activeSection === 'home'} onClick={handleNavClick}>Home</MobileNavLink>
               <MobileNavLink href="#about" isActive={activeSection === 'about'} onClick={handleNavClick}>About</MobileNavLink>
               <MobileNavLink href="#projects" isActive={activeSection === 'projects'} onClick={handleNavClick}>Projects</MobileNavLink>
+              <MobileNavLink href="#certifications" isActive={activeSection === 'certifications'} onClick={handleNavClick}>Certifications</MobileNavLink>
               <MobileNavLink href="#contact" isActive={activeSection === 'contact'} onClick={handleNavClick}>Contact</MobileNavLink>
             </div>
           </motion.div>

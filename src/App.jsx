@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
+import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         </div>
         <About />
         <Projects />
+        <Certifications />
         <Contact />
       </main>
     </div>

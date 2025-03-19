@@ -1,95 +1,114 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, Environment } from '@react-three/drei';
 import { motion } from 'framer-motion';
-import { Suspense, useState, useEffect } from 'react';
 
-// More obvious sphere for debugging
-const AnimatedSphere = () => {
+// Animated decorative elements
+const AnimatedBackground = () => {
   return (
-    <Sphere args={[1, 64, 64]} scale={[2.5, 2.5, 2.5]}>
-      <meshStandardMaterial
-        color="#8B5CF6"
-        emissive="#4C1D95"
-        emissiveIntensity={0.2}
-        wireframe
-        transparent
-        opacity={0.7}
-        metalness={0.8}
-        roughness={0.2}
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      {/* Main sphere */}
+      <motion.div 
+        className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-700 opacity-90 z-10"
+        animate={{ 
+          scale: [1, 1.05, 1],
+          rotate: [0, 5, 0],
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          repeatType: "reverse" 
+        }}
       />
-      <Environment preset="city" />
-    </Sphere>
-  );
-};
-
-// Fallback when WebGL isn't available
-const CanvasFallback = () => (
-  <div className="w-full h-full flex items-center justify-center bg-gradient-to-r from-violet-400/50 to-indigo-400/50 rounded-xl">
-    <div className="text-center">
-      <div className="w-32 h-32 mx-auto rounded-full bg-violet-500/30 animate-pulse"></div>
-      <p className="mt-4 text-white text-opacity-70">WebGL not supported</p>
-    </div>
-  </div>
-);
-
-const ThreeScene = () => {
-  const [isSupported, setIsSupported] = useState(true);
-  const [renderError, setRenderError] = useState(null);
-
-  useEffect(() => {
-    // Check for WebGL support
-    try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || 
-                canvas.getContext('experimental-webgl') || 
-                canvas.getContext('webgl2');
       
-      if (!gl) {
-        console.error("WebGL not supported");
-        setIsSupported(false);
-      }
-    } catch (e) {
-      console.error("WebGL error:", e);
-      setIsSupported(false);
-    }
-  }, []);
-
-  // If WebGL is not supported, show fallback
-  if (!isSupported) {
-    console.log("Showing fallback - WebGL not supported");
-    return <CanvasFallback />;
-  }
-
-  return (
-    <div className="w-full h-full relative">
-      <Suspense fallback={<CanvasFallback />}>
-        <Canvas
-          camera={{ position: [0, 0, 5], fov: 50 }}
-          style={{ width: '100%', height: '100%' }}
-          dpr={[1, 2]}
-          onCreated={state => {
-            console.log("Canvas created successfully");
-          }}
-          onError={error => {
-            console.error("Canvas error:", error);
-            setRenderError(error);
-          }}
-        >
-          <color attach="background" args={['#13074b']} />
-          <ambientLight intensity={1} />
-          <pointLight position={[10, 10, 10]} intensity={1.5} />
-          <AnimatedSphere />
-          <OrbitControls 
-            enableZoom={false} 
-            autoRotate 
-            autoRotateSpeed={1}
-            enablePan={false}
-            minPolarAngle={Math.PI / 2}
-            maxPolarAngle={Math.PI / 2}
-          />
-        </Canvas>
-      </Suspense>
-      {renderError && <CanvasFallback />}
+      {/* Glow effect */}
+      <motion.div 
+        className="absolute w-96 h-96 rounded-full bg-violet-500/30 blur-3xl"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity,
+          repeatType: "reverse" 
+        }}
+      />
+      
+      {/* Orbit rings */}
+      <motion.div 
+        className="absolute w-[350px] h-[350px] border-[4px] border-indigo-300/20 rounded-full"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      />
+      
+      <motion.div 
+        className="absolute w-[450px] h-[450px] border-[2px] border-violet-300/20 rounded-full"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      />
+      
+      {/* Floating particles */}
+      <motion.div 
+        className="absolute top-10 left-16 w-8 h-8 bg-indigo-400/30 rounded-full blur-sm"
+        animate={{ 
+          y: [0, 30, 0],
+          x: [0, 15, 0],
+          opacity: [0.7, 0.3, 0.7]
+        }}
+        transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-20 right-24 w-10 h-10 bg-purple-500/30 rounded-full blur-sm"
+        animate={{ 
+          y: [0, -20, 0],
+          x: [0, -10, 0],
+          opacity: [0.5, 0.8, 0.5]
+        }}
+        transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+      />
+      
+      <motion.div 
+        className="absolute top-32 right-16 w-6 h-6 bg-violet-300/40 rounded-full blur-sm"
+        animate={{ 
+          y: [0, 15, 0],
+          x: [0, -15, 0],
+          opacity: [0.6, 0.3, 0.6]
+        }}
+        transition={{ duration: 7, repeat: Infinity, repeatType: "reverse", delay: 2 }}
+      />
+      
+      {/* Code symbols */}
+      <motion.div 
+        className="absolute top-1/4 left-1/4 text-white text-opacity-30 font-mono text-lg"
+        animate={{ 
+          opacity: [0, 0.7, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+      >
+        &lt;/&gt;
+      </motion.div>
+      
+      <motion.div 
+        className="absolute bottom-1/3 right-1/4 text-white text-opacity-20 font-mono text-xl"
+        animate={{ 
+          opacity: [0, 0.5, 0],
+          y: [0, 15, 0],
+        }}
+        transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", delay: 2 }}
+      >
+        { }
+      </motion.div>
+      
+      <motion.div 
+        className="absolute top-1/3 right-1/3 text-white text-opacity-20 font-mono text-lg"
+        animate={{ 
+          opacity: [0, 0.6, 0],
+          y: [0, -10, 0],
+        }}
+        transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", delay: 3 }}
+      >
+        ( )
+      </motion.div>
     </div>
   );
 };
@@ -159,8 +178,8 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-800/0 via-indigo-700/50 to-purple-800/0 z-10 pointer-events-none" />
-          <ThreeScene />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-800/0 via-indigo-700/30 to-purple-800/0 z-10 pointer-events-none" />
+          <AnimatedBackground />
         </motion.div>
       </div>
       
