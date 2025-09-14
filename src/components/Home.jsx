@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 // Animated decorative elements
 const AnimatedBackground = () => {
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-      {/* Main sphere */}
+      {/* Main sphere with gradient */}
       <motion.div 
         className="absolute w-80 h-80 rounded-full bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-700 opacity-90 z-10"
         animate={{ 
@@ -18,7 +19,7 @@ const AnimatedBackground = () => {
         }}
       />
       
-      {/* Glow effect */}
+      {/* Enhanced glow effect */}
       <motion.div 
         className="absolute w-96 h-96 rounded-full bg-violet-500/30 blur-3xl"
         animate={{ 
@@ -32,84 +33,93 @@ const AnimatedBackground = () => {
         }}
       />
       
-      {/* Orbit rings */}
+      {/* AI/ML themed particles */}
       <motion.div 
-        className="absolute w-[350px] h-[350px] border-[4px] border-indigo-300/20 rounded-full"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-      
-      <motion.div 
-        className="absolute w-[450px] h-[450px] border-[2px] border-violet-300/20 rounded-full"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      />
-      
-      {/* Floating particles */}
-      <motion.div 
-        className="absolute top-10 left-16 w-8 h-8 bg-indigo-400/30 rounded-full blur-sm"
+        className="absolute top-16 left-20 w-3 h-3 bg-blue-400 rounded-full shadow-lg"
         animate={{ 
-          y: [0, 30, 0],
-          x: [0, 15, 0],
-          opacity: [0.7, 0.3, 0.7]
+          y: [0, -30, 0],
+          x: [0, 20, 0],
+          opacity: [0.4, 0.8, 0.4],
+          scale: [1, 1.2, 1]
         }}
-        transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
+        transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
       />
       
       <motion.div 
-        className="absolute bottom-20 right-24 w-10 h-10 bg-purple-500/30 rounded-full blur-sm"
+        className="absolute bottom-24 right-16 w-4 h-4 bg-green-400 rounded-full shadow-lg"
         animate={{ 
-          y: [0, -20, 0],
-          x: [0, -10, 0],
-          opacity: [0.5, 0.8, 0.5]
-        }}
-        transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", delay: 1 }}
-      />
-      
-      <motion.div 
-        className="absolute top-32 right-16 w-6 h-6 bg-violet-300/40 rounded-full blur-sm"
-        animate={{ 
-          y: [0, 15, 0],
+          y: [0, 25, 0],
           x: [0, -15, 0],
-          opacity: [0.6, 0.3, 0.6]
+          opacity: [0.6, 0.9, 0.6],
+          scale: [1, 0.8, 1]
         }}
-        transition={{ duration: 7, repeat: Infinity, repeatType: "reverse", delay: 2 }}
+        transition={{ duration: 5, repeat: Infinity, delay: 1 }}
       />
-      
-      {/* Code symbols */}
+
+      {/* Tech symbols */}
       <motion.div 
-        className="absolute top-1/4 left-1/4 text-white text-opacity-30 font-mono text-lg"
+        className="absolute top-1/4 left-1/3 text-white text-opacity-40 font-mono text-xl font-bold"
         animate={{ 
-          opacity: [0, 0.7, 0],
-          y: [0, -20, 0],
+          opacity: [0, 0.8, 0],
+          y: [0, -15, 0],
+          rotate: [0, 10, 0]
         }}
-        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", delay: 1 }}
+        transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
       >
-        &lt;/&gt;
+        AI
       </motion.div>
       
       <motion.div 
-        className="absolute bottom-1/3 right-1/4 text-white text-opacity-20 font-mono text-xl"
-        animate={{ 
-          opacity: [0, 0.5, 0],
-          y: [0, 15, 0],
-        }}
-        transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", delay: 2 }}
-      >
-        { }
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-1/3 right-1/3 text-white text-opacity-20 font-mono text-lg"
+        className="absolute bottom-1/3 right-1/4 text-white text-opacity-30 font-mono text-lg"
         animate={{ 
           opacity: [0, 0.6, 0],
-          y: [0, -10, 0],
+          y: [0, 20, 0],
         }}
-        transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", delay: 3 }}
+        transition={{ duration: 4, repeat: Infinity, delay: 2 }}
       >
-        ( )
+        &lt;React/&gt;
       </motion.div>
     </div>
+  );
+};
+
+// Typing animation component
+const TypingAnimation = () => {
+  const roles = ["AI Engineer", "Full-Stack Developer", "ML Enthusiast", "React Developer"];
+  const [currentRole, setCurrentRole] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    const currentRoleText = roles[currentRole];
+    let timeoutId;
+
+    if (isTyping) {
+      if (displayText.length < currentRoleText.length) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(currentRoleText.slice(0, displayText.length + 1));
+        }, 100);
+      } else {
+        timeoutId = setTimeout(() => setIsTyping(false), 2000);
+      }
+    } else {
+      if (displayText.length > 0) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 50);
+      } else {
+        setIsTyping(true);
+        setCurrentRole((prev) => (prev + 1) % roles.length);
+      }
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [displayText, isTyping, currentRole, roles]);
+
+  return (
+    <span className="text-violet-300 border-r-2 border-violet-300 pr-1">
+      {displayText}
+    </span>
   );
 };
 
@@ -123,6 +133,17 @@ const Home = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
+          <motion.div
+            className="mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
+            <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-violet-200 text-sm font-medium">
+              👋 Welcome to my portfolio
+            </span>
+          </motion.div>
+          
           <motion.h1 
             className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4 text-white"
             initial={{ opacity: 0, y: 30 }}
@@ -131,22 +152,26 @@ const Home = () => {
           >
             Hi, I'm <span className="text-violet-300">Sourajit Nayak</span>
           </motion.h1>
-          <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-violet-100 mb-6"
+          
+          <motion.div 
+            className="text-lg sm:text-xl md:text-2xl text-violet-100 mb-6 h-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
           >
-            Web Developer & AI/ML 
-          </motion.p>
+            <TypingAnimation />
+          </motion.div>
+          
           <motion.p 
-            className="text-base sm:text-lg text-indigo-100/80 mb-8 max-w-md"
+            className="text-base sm:text-lg text-indigo-100/80 mb-8 max-w-md leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
           >
-            Creating beautiful and functional web experiences with modern technologies.
+            Architecting enterprise solutions with AI/ML and modern web technologies. 
+            Currently building scalable applications at <span className="text-violet-300 font-semibold">LANDFORCE</span>.
           </motion.p>
+          
           <motion.div
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 30 }}
@@ -155,7 +180,7 @@ const Home = () => {
           >
             <motion.a
               href="#about"
-              className="btn bg-white text-purple-700 hover:bg-violet-100 text-center"
+              className="btn bg-white text-purple-700 hover:bg-violet-100 text-center font-semibold"
               whileHover={{ scale: 1.05, backgroundColor: "#F3E8FF" }}
               whileTap={{ scale: 0.95 }}
             >
@@ -163,12 +188,33 @@ const Home = () => {
             </motion.a>
             <motion.a
               href="#contact"
-              className="btn border-2 border-white text-white hover:bg-white/10 text-center"
+              className="btn border-2 border-white text-white hover:bg-white/10 text-center font-semibold"
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
               whileTap={{ scale: 0.95 }}
             >
-              Contact Me
+              Let's Connect
             </motion.a>
+          </motion.div>
+          
+          {/* Quick stats */}
+          <motion.div
+            className="flex gap-8 mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">500+</div>
+              <div className="text-violet-200 text-sm">Users Served</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">6+</div>
+              <div className="text-violet-200 text-sm">Certifications</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">3+</div>
+              <div className="text-violet-200 text-sm">Years Experience</div>
+            </div>
           </motion.div>
         </motion.div>
         
@@ -178,46 +224,11 @@ const Home = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-800/0 via-indigo-700/30 to-purple-800/0 z-10 pointer-events-none" />
           <AnimatedBackground />
         </motion.div>
       </div>
-      
-      {/* Background decorative elements */}
-      <motion.div 
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
-        <motion.div 
-          className="absolute top-20 left-10 w-72 h-72 bg-violet-500/20 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.3, 0.2]
-          }} 
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2]
-          }} 
-          transition={{ 
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 1
-          }}
-        />
-      </motion.div>
     </section>
   );
 };
 
-export default Home; 
+export default Home;
