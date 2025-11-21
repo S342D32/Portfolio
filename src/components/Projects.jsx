@@ -16,30 +16,33 @@ const Projects = () => {
       category: "AI/ML",
       liveUrl: "https://mcqgeneratorapp232.onrender.com/",
       githubUrl: "https://github.com/S342D32/MCQGeneratorApp",
-      metrics: { users: "500+", accuracy: "92%", questions: "10K+" }
+      metrics: { users: "500+", accuracy: "92%", questions: "10K+" },
+      videoUrl: "" // Add video URL when available
     },
     {
-  id: 2,
-  title: "MINI Perplexity",
-  description: "Built and deployed a modern AI-powered search and summarization assistant inspired by Perplexity. Features real-time web search via Tavily API, clean chat interface with collapsible sidebar, NextAuth authentication, and Supabase integration. Delivers live web results with AI-generated summaries in a fast, privacy-first application.",
-  image: "https://placehold.co/400x250/10B941/FFFFFF?text=AI+Search+Assistant",
-  tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "shadcn/ui", "NextAuth", "Supabase", "Tavily API", "Docker"],
-  category: "Full-Stack",
-  liveUrl: "https://mini-perplexity-delta.vercel.app/",
-  githubUrl: "https://github.com/S342D32/Mini-Perplexity",
-  metrics: { features: "Real-time Search", deployment: "Vercel", integration: "Multi-API" }
-}
+      id: 2,
+      title: "MINI Perplexity",
+      description: "Built and deployed a modern AI-powered search and summarization assistant inspired by Perplexity. Features real-time web search via Tavily API, clean chat interface with collapsible sidebar, NextAuth authentication, and Supabase integration. Delivers live web results with AI-generated summaries in a fast, privacy-first application.",
+      image: "/mini.png",
+      tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "shadcn/ui", "NextAuth", "Supabase", "Tavily API", "Docker"],
+      category: "Full-Stack",
+      liveUrl: "https://mini-perplexity-delta.vercel.app/",
+      githubUrl: "https://github.com/S342D32/Mini-Perplexity",
+      metrics: { features: "Real-time Search", deployment: "Vercel", integration: "Multi-API" },
+      videoUrl: "" // Add video URL when available
+    }
 ,
     {
       id: 6,
       title: "Machine Learning Species Classifier",
       description: "Built and deployed penguin species classification model achieving 95+ percent prediction accuracy. Implemented comprehensive data preprocessing pipeline with feature engineering and created interactive web interface using Streamlit.",
-      image: "https://placehold.co/400x250/10B981/FFFFFF?text=ML+Species+Classifier",
+      image: "/pen.png",
       tech: ["Python", "Streamlit", "Scikit-learn", "Pandas", "NumPy", "Data Visualization"],
       category: "AI/ML",
       liveUrl: "#",
       githubUrl: "#",
-      metrics: { accuracy: "95%", interactions: "1K+", models: "Multiple" }
+      metrics: { accuracy: "95%", interactions: "1K+", models: "Multiple" },
+      videoUrl: "" // Add video URL when available
     },
     {
       id: 3,
@@ -50,7 +53,8 @@ const Projects = () => {
       category: "AI/ML",
       liveUrl: "#",
       githubUrl: "#",
-      metrics: { queries: "Complex", deployment: "Cloud", security: "Enterprise" }
+      metrics: { queries: "Complex", deployment: "Cloud", security: "Enterprise" },
+      videoUrl: "/pg.mp4"
     },
     {
       id: 1,
@@ -61,7 +65,8 @@ const Projects = () => {
       category: "Full-Stack",
       liveUrl: "#",
       githubUrl: "#",
-      metrics: { users: "500+", components: "40+", performance: "+45%" }
+      metrics: { users: "500+", components: "40+", performance: "+45%" },
+      videoUrl: "" // Add video URL when available
     },
     {
       id: 5,
@@ -72,7 +77,8 @@ const Projects = () => {
       category: "Full-Stack",
       liveUrl: "#",
       githubUrl: "#",
-      metrics: { sessions: "1K+", uptime: "99.8%", mobile: "95%" }
+      metrics: { sessions: "1K+", uptime: "99.8%", mobile: "95%" },
+      videoUrl: "" // Add video URL when available
     },
    
   ];
@@ -190,6 +196,7 @@ const Projects = () => {
 // Separate ProjectCard component for better performance
 const ProjectCard = ({ project, index }) => {
   const projectRef = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
   const isProjectInView = useInView(projectRef, { once: true, amount: 0.2 });
 
   return (
@@ -204,12 +211,47 @@ const ProjectCard = ({ project, index }) => {
       layout // Enable layout animations
     >
       <div className="relative h-48 bg-gradient-to-br from-violet-500 to-indigo-600 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
+        {/* Video or Image Display */}
+        {showVideo && project.videoUrl ? (
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => setShowVideo(false)}
+          >
+            <source src={project.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Video Toggle Button */}
+        {project.videoUrl && (
+          <motion.button
+            onClick={() => setShowVideo(!showVideo)}
+            className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-all"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {showVideo ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m-6-8h8a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2z" />
+              </svg>
+            )}
+          </motion.button>
+        )}
         
         {/* Category badge */}
         <div className="absolute top-4 left-4">

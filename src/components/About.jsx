@@ -176,21 +176,21 @@ const About = () => {
               >
                 View Projects
               </motion.a>
-             <motion.button
-  onClick={() => {
-    const link = document.createElement('a');
-    link.href = '/images/Sourajit Nayak.pdf';
-    link.download = 'Sourajit_Nayak_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }}
-  className="btn border-2 border-gray-300 text-gray-700 hover:bg-gray-50"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
->
-  Download Resume
-</motion.button>
+              <motion.button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/Sourajit_Nayak_Resume.pdf';
+                  link.download = 'Sourajit_Nayak_Resume.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="btn border-2 border-gray-300 text-gray-700 hover:bg-gray-50"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Download Resume
+              </motion.button>
 
             </div>
           </motion.div>

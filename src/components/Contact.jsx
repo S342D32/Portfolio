@@ -195,11 +195,39 @@ const Contact = () => {
                   </svg>
                   <span className="font-medium text-sm">GitHub</span>
                 </motion.a>
+                
+                <motion.a 
+                  href="https://www.hackerrank.com/profile/sourajitnayak341" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 p-4 bg-[#00EA64] text-white rounded-xl transition-all hover:bg-[#00C853] group"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c1.285 0 9.75 4.886 10.392 6 .642 1.114.642 10.886 0 12C21.75 19.114 13.285 24 12 24s-9.75-4.886-10.392-6c-.642-1.114-.642-10.886 0-12C2.25 4.886 10.715 0 12 0zm2.295 6.799c-.141 0-.258.115-.258.258v3.875H9.963V6.799c0-.141-.115-.258-.258-.258H8.963c-.141 0-.258.115-.258.258v10.402c0 .141.115.258.258.258h.742c.141 0 .258-.115.258-.258v-4.129h4.074v4.129c0 .141.115.258.258.258h.742c.141 0 .258-.115.258-.258V6.799c0-.141-.115-.258-.258-.258h-.742z"/>
+                  </svg>
+                  <span className="font-medium text-sm">HackerRank</span>
+                </motion.a>
+                
+                <motion.a 
+                  href="https://www.coursera.org/user/2743a0f0482231f9f9526228c76b309a" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 p-4 bg-[#0056D3] text-white rounded-xl transition-all hover:bg-[#004BB5] group"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.374 23.977c-4.183-.21-7.662-2.254-9.628-5.667-1.966-3.413-1.904-7.506.172-10.83C3.596 3.156 7.075 1.112 11.258.902c4.183-.21 8.176 1.582 10.142 4.995 1.966 3.413 1.904 7.506-.172 10.83-2.078 3.324-5.557 5.368-9.74 5.578l-.114-.328zm8.074-8.616c-.851.851-2.234.851-3.085 0l-4.911-4.911c-.851-.851-.851-2.234 0-3.085.851-.851 2.234-.851 3.085 0l4.911 4.911c.851.851.851 2.234 0 3.085z"/>
+                  </svg>
+                  <span className="font-medium text-sm">Coursera</span>
+                </motion.a>
               </div>
               
               {/* Resume download */}
               <motion.a
-                href="/resume.pdf"
+                href="/Sourajit_Nayak_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl transition-all hover:from-violet-700 hover:to-indigo-700 w-full"

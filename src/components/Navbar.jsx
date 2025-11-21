@@ -98,7 +98,7 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         {/* Resume Download - Desktop */}
         <motion.a
-          href="/resume.pdf"
+          href="/Sourajit_Nayak_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-full text-sm font-medium transition-all hover:from-violet-700 hover:to-indigo-700"
@@ -169,7 +169,7 @@ const Navbar = () => {
               
               {/* Mobile Resume Download */}
               <motion.a
-                href="/resume.pdf"
+                href="/Sourajit_Nayak_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-4 py-3 mt-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl font-medium"
